@@ -1,0 +1,134 @@
+###
+GET http://localhost:8081/Venue/all
+
+###
+POST http://localhost:8081/Venue/add?id=ScilabA&capacity=60
+Content-Type: application/x-www-form-urlencoded
+
+
+
+###
+POST http://localhost:8081/Application/add
+Content-Type: application/json
+
+{
+    "user": {
+        "id": "KHDMAZ007"
+    },
+    "grades": [
+        {"course": "CSC1015F", "mark": 75},
+        {"course": "CSC1016S", "mark": 75},
+        {"course": "CSC2001F", "mark": 75},
+        {"course": "CSC2002S", "mark": 75},
+        {"course": "CSC3002F", "mark": 75},
+        {"course": "CSC3003S", "mark": 75},
+        {"course": "CSC3022F", "mark": 75}
+    ],
+    "role": "TA"
+}
+
+###
+
+POST http://localhost:8081/TA/add?userId=KHDMAZ004&courseId=CSC1016S
+
+###
+POST http://localhost:8081/User/add
+Content-Type: application/json
+
+{
+    "id": "THEADM001",
+    "firstName": "Mazano",
+    "lastName": "Kuhudzai",
+    "password": "123456"
+}
+
+
+###
+POST http://localhost:8081/Convenor/add
+Content-Type: application/json
+
+{
+  "id": "THECON002",
+  "firstName": "The",
+  "lastName": "Con",
+  "password": "123456",
+  "course": {
+    "id": "CSC1015F"
+  }
+}
+
+###
+GET http://localhost:8081/Course/getMaxAllocations?courseId=CSC1015F
+
+
+###
+DELETE  http://localhost:8081/Slot/delete/252
+
+
+###
+POST http://localhost:8081/Tutor/add
+Content-Type: application/json
+
+[
+  {
+    "userId": "KHDMAZ002",
+    "courseId": "CSC1015F"
+  },
+  {
+    "userId": "KHDMAZ003",
+    "courseId": "CSC1015F"
+  }
+]
+
+
+
+
+### Login Request
+POST  http://localhost:8081/login
+Content-Type: application/json
+
+{
+  "id": "your_user_id_here",
+  "password": "your_password_here"
+}
+
+
+###
+POST http://localhost:8081/Slot/assign
+Content-Type: application/json
+
+[
+    {
+        "slotId": 253,
+        "tutorId": "KHDMAZ002"
+    },
+    {
+        "slotId": 256,
+        "tutors": "KHDMAZ002"
+    }
+]
+
+###
+POST http://localhost:8081/attendance/mark
+Content-Type: application/json
+
+[
+    {
+        "tutorId": "KHDMAZ002",
+        "slotId": 404,
+        "present": false ,
+        "weekNumber": 1
+    },
+    {
+        "tutorId": "KHDMAZ002",
+        "slotId": 253,
+        "present": true,
+        "weekNumber": 1
+    }
+]
+
+
+###
+
+# GET Request to retrieve present attendance
+GET http://localhost:8081/attendance/present?weekNumber=1&dayOfWeek=Tue&course=CSC1015F
